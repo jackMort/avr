@@ -114,7 +114,7 @@ uint8_t therm_reset() {
 }
 
 /**
- * zapis bitu na wyjœcie termometru
+ * zapis bitu na wyjÂœcie termometru
  */
 void therm_write_bit( uint8_t bit ) {
 	THERM_LOW();
@@ -128,7 +128,7 @@ void therm_write_bit( uint8_t bit ) {
 }
 
 /**
- * odczyt bitu z wyjœcia termometru
+ * odczyt bitu z wyjÂœcia termometru
  */
 uint8_t therm_read_bit( void ) {
 	uint8_t bit = 0;
@@ -167,8 +167,8 @@ void therm_write_byte( uint8_t byte ) {
 }
 
 /**
- * Metoda odczytuje temperaturê z czujnika do buffora znaków
- * @param *buffer buffor do którego wczytana zostanie temperatura
+ * Metoda odczytuje temperaturÄ™ z czujnika do buffora znakÃ³w
+ * @param *buffer buffor do ktÃ³rego wczytana zostanie temperatura
  */
 void therm_read_temperature( char *buffer ) {
 	uint8_t temperature[2];
@@ -199,15 +199,15 @@ void therm_read_temperature( char *buffer ) {
 }
 
 /**
- * Funkcja inicijalizuj¹ca ekran LCD
+ * Funkcja inicijalizujÅ¡ca ekran LCD
  */
 void initLCD( void ) {
 	LCD_init();		// inicjalizacja LCD
-	LCD_PL_chars_init();	// inicjalizacja polskich znaków
+	LCD_PL_chars_init();	// inicjalizacja polskich znakÃ³w
 }
 
 /**
- * Metoda wy¿wietla wizytówkê
+ * Metoda wyÅ¼wietla wizytÃ³wkÄ™
  */
 void displayWelcomeMessage( void ) {
 	LCD_putstr_P( PSTR( "Seiho Temp" ) );
@@ -221,7 +221,7 @@ void displayWelcomeMessage( void ) {
 }
 
 /**
- * Metoda wyœwietla temperaturê
+ * Metoda wyÂœwietla temperaturÄ™
  */
 void displayTemp( void ) {
 
@@ -242,20 +242,20 @@ void displayTemp( void ) {
 }
 
 /**
- * Metoda g³ówna
+ * Metoda gÅ‚Ã³wna
  */
 int main( void ) {
-	// inicjalizacja wyœwietlacza ...
+	// inicjalizacja wyÂœwietlacza ...
 	initLCD();
 
 	// ustaw diode na output
 	IND_LED_OUTPUT_MODE();
 	IND_LED_OFF();
 
-	// wyœwietl wizytówkê ...
+	// wyÂœwietl wizytÃ³wkÄ™ ...
 	displayWelcomeMessage();
 
-	// pêtla g³ówna
+	// pÄ™tla gÅ‚Ã³wna
 	while( 1 ) 
 		displayTemp();
 

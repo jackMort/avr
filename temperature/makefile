@@ -1,30 +1,30 @@
-# Nazwa pliku z funkcj¹ main() - BEZ ROZSZERZENIA!
+# Nazwa pliku z funkcjÅ¡ main() - BEZ ROZSZERZENIA!
 TARGET = seiho_temp
 
-# Lista plików zawieraj¹cych konfiguracjê programu i sprzêtu
-# ich zmiana powoduje przebudowanie ca³ego projektu
+# Lista plikÃ³w zawierajÅ¡cych konfiguracjÄ™ programu i sprzÄ™tu
+# ich zmiana powoduje przebudowanie caÅ‚ego projektu
 CONFIG = config.h
 
-# Lista plików Ÿród³owych w jêzyku C
+# Lista plikÃ³w ÂŸrÃ³dÅ‚owych w jÄ™zyku C
 SRC = $(TARGET).c
 
-# Lista plików Ÿród³owych w asemblerze (rozszerzenie S - DU¯E S !)
+# Lista plikÃ³w ÂŸrÃ³dÅ‚owych w asemblerze (rozszerzenie S - DUÅ»E S !)
 ASRC = 
 
 # typ mikrokontrolera
 MCU = atmega32
 
-# Format pliku wyjœciowego (srec, ihex)
+# Format pliku wyjÂœciowego (srec, ihex)
 FORMAT = ihex
 
 # Poziom optymalizacji (0, 1, 2, 3, s) 
 # (Uwaga: 3 nie zawsze jest najlepszym wyborem)
 OPT = s
 
-# Katalog z bibliotekami u¿ytkownika
+# Katalog z bibliotekami uÅ¼ytkownika
 USRLIB	= ../lib
 
-# Lista plików Ÿród³owych bibliotek w jêzyku C
+# Lista plikÃ³w ÂŸrÃ³dÅ‚owych bibliotek w jÄ™zyku C
 SRCLIB =
 #include $(USRLIB)/conv/sources
 include $(USRLIB)/lcd/sources
