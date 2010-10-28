@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <time.h>
 
 // baudrate settings are defined in <asm/termbits.h>, which is
 // included by <termios.h>
@@ -22,8 +23,15 @@ volatile int STOP=FALSE;
 
 int main( void ) {
 	int fd, res;
+	
+	time_t t;
+	struct tm * timeinfo;
+	char buffer[80];
+
 	struct termios oldtio, newtio;
 	char buf[255];
+	
+	float tmp_temp = -100000.;
 
 	// Open modem device for reading and writing and not as controlling tty
 	// because we don't want to get killed if linenoise sends CTRL-C.
@@ -81,19 +89,30 @@ int main( void ) {
 	tcflush( fd, TCIFLUSH );
 	tcsetattr( fd, TCSANOW, &newtio );
 
+	FILE * file;
+
 	// terminal settings done, now handle input
 	// In this example, inputting a 'z' at the beginning of a line will 
 	// exit the program.
 	while ( STOP == FALSE ) { // loop until we have a terminating condition
-		/* read blocks program execution until a line terminating character is 
-		   input, even if more than 255 chars are input. If the number
-		   of characters read is smaller than the number of chars available,
-		   subsequent reads will return the remaining chars. res will be set
-		   to the actual number of characters actually read */
-
 		res = read( fd, buf, 255 ); 
-		buf[res] = 0; // set end of string, so we can printf
-		printf( ":%s:%d\n", buf, res );
+		buf[res] = 0; 
+
+		float temp = atof( buf );
+		
+		if( temp != tmp_temp ) {
+			time( &t );
+			timeinfo = localtime( &t );
+			strftime( buffer, 80, "%Y-%m-%d_%H:%M:%S", timeinfo );
+		
+			printf( "%s %4.2f\n", buffer, temp );
+			
+			file = fopen( "data.out", "a" );
+			fprintf( file, "%s %4.2f\n", buffer, temp );
+			fclose( file );
+
+			tmp_temp = temp;
+		}
 
 		if( buf[0] == 'z' ) STOP = TRUE;
 	}
